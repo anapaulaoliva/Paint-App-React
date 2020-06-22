@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import Name from './Name'
+import Canvas from './Canvas'
 import ColorPicker from './ColorPicker'
 import randomColor from 'randomcolor'
 
@@ -19,17 +20,25 @@ export default function Paint() {
 
   useEffect(getColors, []);
   return (
-    <header style={{ borderTop: `10px solid ${activeColor}` }}>
-      <div className="app">
-        <Name />
-      </div>
-      <div style={{ marginTop: 10 }}>
-        <ColorPicker
-          colors={colors}
-          activeColor={activeColor}
-          setActiveColor={setActiveColor}
+    <div className="app">
+      <header style={{ borderTop: `10px solid ${activeColor}` }}>
+        <div className="app">
+          <Name />
+        </div>
+        <div style={{ marginTop: 10 }}>
+          <ColorPicker
+            colors={colors}
+            activeColor={activeColor}
+            setActiveColor={setActiveColor}
+          />
+        </div>
+      </header>
+      {activeColor && (
+        <Canvas
+          color={activeColor}
+          height={window.innerHeight}
         />
-      </div>
-    </header>
+      )}
+    </div>
   )
 }
